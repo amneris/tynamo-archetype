@@ -1,11 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.amneris</groupId>
-  <artifactId>tynamo-archetype</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>Archetype - tynamo-archetype</name>
-  <url>http://maven.apache.org</url>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.amneris</groupId>
+	<artifactId>tynamo-archetype</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>tynamo-archetype</name>
+	<description>Archetype for creating a model-driven, full-stack Tynamo application</description>
+	<url>https://github.com/amneris/tynamo-archetype</url>
 	<packaging>maven-archetype</packaging>
 
 	<parent>
@@ -15,17 +17,10 @@
 	</parent>
 
 	<scm>
-		<connection>scm:svn:http://svn.codehaus.org/tynamo/trunk/tynamo-archetype</connection>
-		<developerConnection>scm:svn:https://svn.codehaus.org/tynamo/trunk/tynamo-archetype</developerConnection>
-		<url>http://svn.tynamo.codehaus.org/tynamo/trunk/tynamo-archetype</url>
+		<connection>scm:git:git://github.com/amneris/tynamo-archetype.git</connection>
+		<developerConnection>scm:git:git@github.com:amneris/tynamo-archetype.git</developerConnection>
+		<url>https://github.com/amneris/tynamo-archetype/tree/master/</url>
 	</scm>
-
-	<distributionManagement>
-		<site>
-			<id>tynamo-site</id>
-			<url>dav:https://dav.codehaus.org/tynamo/constant/sites/tynamo-archetype</url>
-		</site>
-	</distributionManagement>
 
 	<build>
 
