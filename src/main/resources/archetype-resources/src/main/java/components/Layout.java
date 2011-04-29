@@ -8,9 +8,11 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Context;
 import org.apache.tapestry5.services.Environment;
+import org.apache.tapestry5.ComponentResources;
+import ${package}.entities.MyDomainObject;
 
 
-@Import(stylesheet = "classpath:org/tynamo/themes/tapestryskin/theme.css")
+@Import(stylesheet = {"context:themes/rm/theme.css"})
 public class Layout
 {
 
@@ -25,12 +27,15 @@ public class Layout
 	private String title;
 
 	@Property(write = false)
-	@Parameter(value = "block:subMenuBlock", defaultPrefix = BindingConstants.LITERAL)
-	private Block subMenuBlock;
+	@Parameter
+	private Block sidebar;
 
 	@Property(write = false)
-	@Parameter(value = "block:navBlock", defaultPrefix = BindingConstants.LITERAL)
-	private Block navBlock;
+	@Parameter
+	private Block head;
+
+	@Inject
+	private ComponentResources resources;
 
 	@Property
 	@Parameter(required = false, defaultPrefix = BindingConstants.MESSAGE)
@@ -43,5 +48,34 @@ public class Layout
 	@Property
 	@Parameter(required = false, defaultPrefix = BindingConstants.LITERAL)
 	private String bodyId;
+
+	@Property(write = false)
+	@Parameter
+	private Block tabs;
+
+	public boolean isSidebarBound()
+	{
+		return resources.isBound("sidebar");
+	}
+
+	public boolean isHeadBound()
+	{
+		return resources.isBound("head");
+	}
+
+	public String getMainCssClass()
+	{
+		return isSidebarBound() ? "" : "nosidebar";
+	}
+
+	public boolean isTabsBound()
+	{
+		return resources.isBound("tabs");
+	}
+
+	public Class getMyDomainObject()
+	{
+		return MyDomainObject.class;
+	}
 
 }
