@@ -1,29 +1,27 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <t:layout title="title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
-	#set( $D = '$' )
-	<p:subMenuBlock>
-		<ul>
-			<ul id="local">
-			</ul>
-		</ul>
-	</p:subMenuBlock>
-	<p:navBlock>
-		<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List" context="classDescriptor.beanType">${D}{listAllLinkMessage}</a>
-	</p:navBlock>
 
-	<h1>${D}{title}</h1>
+
+	<t:tynamo.flash t:id="flash"/>
+
+	<h2>${D}{title}</h2>
 
 	<br/>
 
 	<t:form clientValidation="true" validate="bean">
 		<t:errors/>
 
-		<div class="t-beaneditor">
+		<div class="box">
 			<t:beaneditor object="mb:bean" t:mixins="tynamo/Advisor" advisor.key="add"/>
+
 			<br/>
+
 			<div class="t-beaneditor-row">
-				<t:submit t:id="save" id="save" t:event="apply" class="button" value="${D}{message:org.tynamo.i18n.apply}"/>
-				<t:submit t:id="saveAndReturnButton" id="saveAndReturnButton" class="button" value="${D}{message:org.tynamo.i18n.applyAndReturn}"/>
+				<t:submit t:id="save" id="save" t:event="apply" class="button"
+				          value="${D}{message:org.tynamo.i18n.apply}"/>
+				<t:submit t:id="saveAndReturnButton" id="saveAndReturnButton" class="button"
+				          value="${D}{message:org.tynamo.i18n.applyAndReturn}"/>
 				&nbsp; or &nbsp;
 				<t:actionlink class="button" style="color:red; font-weight:bold;" t:id="cancel">
 					${D}{message:org.tynamo.i18n.cancel}
@@ -31,5 +29,14 @@
 			</div>
 		</div>
 	</t:form>
+
+	<p:sidebar>
+		<ul id="local">
+			<li>
+				<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List"
+				   context="classDescriptor.beanType">${D}{listAllLinkMessage}</a>
+			</li>
+		</ul>
+	</p:sidebar>
 
 </t:layout>

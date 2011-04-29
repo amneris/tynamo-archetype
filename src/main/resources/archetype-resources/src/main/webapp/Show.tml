@@ -1,33 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <t:layout title="title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
-	#set( $D = '$' )
-	<p:subMenuBlock>
-		<ul>
-			<ul id="local">
-				<li>
-					<t:pagelink class="editlink" t:page="Edit" context="editPageContext">${D}{editlinkMessage}</t:pagelink>
-				</li>
-				<li>
-					
-				</li>
-				<t:if test="allowRemove">
-					<li>
-						<t:actionlink class="deletelink" t:id="delete">${D}{message:org.tynamo.i18n.remove}</t:actionlink>
-					</li>
-				</t:if>
-			</ul>
-		</ul>
-	</p:subMenuBlock>
-	<p:navBlock>
-		<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List" context="classDescriptor.beanType">${D}{listAllLinkMessage}</a>
-	</p:navBlock>
 
-	<h1>${D}{title}</h1>
+	<div class="contextual">
+		<t:security.hasRole role="admin">
+			<t:pagelink class="icon icon-edit" t:page="Edit" context="editPageContext">${D}{editlinkMessage}</t:pagelink>
+			<t:if test="allowRemove">
+				<t:actionlink onclick="return confirm('Are you sure ?');" class="icon icon-del"
+				              t:id="delete">${D}{message:org.tynamo.i18n.remove}</t:actionlink>
+			</t:if>
+		</t:security.hasRole>
+	</div>
 
-	<br/>
-
+	<h2>${D}{title}</h2>
 
 	<t:beandisplay object="bean" lean="true" t:mixins="tynamo/Advisor"/>
+
+	<p:sidebar>
+		<ul id="local">
+			<li>
+				<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List"
+				   context="classDescriptor.beanType">${D}{listAllLinkMessage}</a>
+			</li>
+		</ul>
+	</p:sidebar>
+
 
 </t:layout>

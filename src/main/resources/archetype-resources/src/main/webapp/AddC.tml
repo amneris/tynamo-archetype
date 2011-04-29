@@ -1,15 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <t:layout title="title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
-	#set( $D = '$' )
-	<p:subMenuBlock>
-		<ul>
-			<ul id="local">
-			</ul>
-		</ul>
-	</p:subMenuBlock>
-	<p:navBlock>
-		<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List" context="classDescriptor.beanType">${D}{listAllLinkMessage}</a>
-	</p:navBlock>
+
+	<t:tynamo.flash t:id="flash" />
 
 	<h1>${D}{title}</h1>
 
@@ -30,5 +22,12 @@
 			</div>
 		</div>
 	</t:form>
+        <p:sidebar>
+        <ul id="local">
+            <li>
+                <a style="font-weight:bolder;margin-left:10px" t:id="link" page="List" context="classDescriptor.type">${D}{listAllLinkMessage}</a>
+            </li>
+        </ul>
+    </p:sidebar>
 
 </t:layout>
