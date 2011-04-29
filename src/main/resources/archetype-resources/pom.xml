@@ -13,8 +13,17 @@
 
 	<properties>
 		<tynamo-version>0.2.0-SNAPSHOT</tynamo-version>
+		<tapestry.app-package>${package}</tapestry.app-package>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+<!--
+	<scm>
+		<connection></connection>    <!- read-only ->
+		<url></url>
+		<developerConnection></developerConnection> <!- write-read ->
+	</scm>
+-->
 
 	<build>
 		<finalName>${artifactId}</finalName>
@@ -33,16 +42,9 @@
 			<!-- Run the application using "mvn jetty:run" -->
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-				<version>6.1.26</version>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>7.2.0.RC0</version>
 				<configuration>
-					<contextPath>/</contextPath>
-					<!-- Log to the console. -->
-					<requestLog implementation="org.mortbay.jetty.NCSARequestLog">
-						<!-- This doesn't do anything for Jetty, but is a workaround for a Maven bug
-							 that prevents the requestLog from being set. -->
-						<append>true</append>
-					</requestLog>
 					<systemProperties>
 						<systemProperty>
 							<name>tapestry.compress-whitespace</name>
@@ -52,7 +54,17 @@
 							<name>tapestry.production-mode</name>
 							<value>false</value>
 						</systemProperty>
+						<systemProperty>
+							<name>javax.xml.stream.XMLInputFactory</name>
+							<value>com.ctc.wstx.stax.WstxInputFactory</value>
+						</systemProperty>
 					</systemProperties>
+<!--
+					<systemPropertiesFile>target/classes/jetty.system.properties</systemPropertiesFile>
+-->
+					<webAppConfig>
+						<contextPath>/${D}{project.build.finalName}</contextPath>
+					</webAppConfig>
 				</configuration>
 			</plugin>
 
@@ -86,6 +98,23 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- Provides build number and timestamp -->
+<!--
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.0-beta-3</version>
+				<executions>
+					<execution>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+-->
 		</plugins>
 	</build>
 
@@ -95,7 +124,7 @@
 			<plugin>
 				<groupId>org.apache.tapestry</groupId>
 				<artifactId>tapestry-component-report</artifactId>
-				<version>5.2.4</version>
+				<version>5.2.0</version>
 				<configuration>
 					<rootPackage>${package}</rootPackage>
 				</configuration>
@@ -130,25 +159,63 @@
 			<version>${D}{tynamo-version}</version>
 		</dependency>
 
+		<!-- force 5.2.4 -->
+			<dependency>
+				<groupId>org.apache.tapestry</groupId>
+				<artifactId>tapestry-hibernate</artifactId>
+				<version>5.2.4</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.tapestry</groupId>
+				<artifactId>tapestry-beanvalidator</artifactId>
+				<version>5.2.4</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.tapestry</groupId>
+				<artifactId>tapestry-upload</artifactId>
+				<version>5.2.4</version>
+			</dependency>
+
 		<dependency>
 			<groupId>org.tynamo</groupId>
 			<artifactId>tapestry-model-test</artifactId>
-			<version>${D}{tynamo-version}</version>
+			<version>0.1.0</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>org.tynamo</groupId>
-			<artifactId>tapestry-model-web</artifactId>
-			<version>${D}{tynamo-version}</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.13</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.2.125</version>
+			<groupId>org.tynamo</groupId>
+			<artifactId>tapestry-resteasy</artifactId>
+			<version>0.2.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jettison-provider</artifactId>
+			<version>2.0.1.GA</version>
+		</dependency>
+
+		<!--Add for the security-->
+		<dependency>
+			<groupId>org.tynamo</groupId>
+			<artifactId>tapestry-security</artifactId>
+			<version>0.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.tynamo</groupId>
+			<artifactId>tapestry-routing</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		
 	</dependencies>
 
 	<!--
@@ -220,5 +287,115 @@
 		</repository>
 
 	</repositories>
+
+	<profiles>
+		<profile>
+			<id>commons</id>
+			<build>
+
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
+					</resource>
+					<resource>
+						<directory>src/profiles/commons/resources</directory>
+						<filtering>true</filtering>
+					</resource>
+					<resource>
+						<directory>src/profiles/${D}{deploy.profile}/resources</directory>
+						<filtering>true</filtering>
+					</resource>
+				</resources>
+
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<version>2.1-alpha-2</version>
+						<configuration>
+							<archive>
+								<manifest>
+									<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+								</manifest>
+								<manifestEntries>
+									<Implementation-Build>${D}{buildNumber}</Implementation-Build>
+								</manifestEntries>
+							</archive>
+							<webResources>
+								<!-- cuidado con el orden, el orden de los factores afecta al resultado final -->
+								<!-- a diferencia del "resources" los webResources se procesand e abajo a arriba -->
+								<resource>
+									<directory>src/profiles/${D}{deploy.profile}/webapp</directory>
+									<filtering>true</filtering>
+								</resource>
+								<resource>
+									<directory>src/profiles/commons/webapp</directory>
+									<filtering>true</filtering>
+								</resource>
+							</webResources>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+
+			<properties>
+				<hibernate.show_sql>true</hibernate.show_sql>
+				<hibernate.format_sql>true</hibernate.format_sql>
+			</properties>
+
+		</profile>
+
+
+		<profile>
+			<id>dev.local</id>
+
+			<properties>
+				<deploy.profile>development</deploy.profile>
+
+				<!--  Google-API Key for localhost -->
+				<!--
+					<ck.google.key>ABQIAAAABaUqD8Xx-kA5BiG_UZLiBhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxTtdAZsgth3rHsqJVoqWZyBNQnQPw</ck.google.key>
+				-->
+
+				<!-- Local database properties -->
+				<hibernate.connection.url.host>localhost</hibernate.connection.url.host>
+				<hibernate.connection.url.databasename>${artifactId}_dev</hibernate.connection.url.databasename>
+				<hibernate.connection.username>${artifactId}_admin</hibernate.connection.username>
+				<hibernate.connection.password>${artifactId}_4dm1n</hibernate.connection.password>
+				<hibernate.show_sql>true</hibernate.show_sql>
+				<hibernate.format_sql>true</hibernate.format_sql>
+
+				<tapestry.production-mode>false</tapestry.production-mode>
+				<tapestry.compress-whitespace>false</tapestry.compress-whitespace>
+
+			</properties>
+		</profile>
+
+
+		<profile>
+			<id>[YOURDOMAIN].com</id>
+
+			<properties>
+				<deploy.profile>production</deploy.profile>
+
+				<!--  Google-API Key for [YOURDOMAIN].com -->
+<!--
+				<ck.google.key>ABQIAAAABaUqD8Xx-kA5BiG_UZLiBhTfbvvK_7wN5rmfk0_m2BYm7INm6RRxMZysq26CjEdwhqU68TWKr9xczA</ck.google.key>
+-->
+
+				<!-- Local database properties -->
+				<hibernate.connection.url.host>localhost</hibernate.connection.url.host>
+				<hibernate.connection.url.databasename>${artifactId}</hibernate.connection.url.databasename>
+				<hibernate.connection.username>${artifactId}_admin</hibernate.connection.username>
+				<hibernate.connection.password>${artifactId}_4dm1n</hibernate.connection.password>
+				<hibernate.show_sql>false</hibernate.show_sql>
+				<hibernate.format_sql>false</hibernate.format_sql>
+
+				<tapestry.production-mode>true</tapestry.production-mode>
+				<tapestry.compress-whitespace>true</tapestry.compress-whitespace>
+			</properties>
+		</profile>
+
+	</profiles>
 
 </project>

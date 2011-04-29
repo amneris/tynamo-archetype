@@ -6,11 +6,11 @@ mvn archetype:generate -DarchetypeCatalog=http://tynamo.codehaus.org/
 mvn archetype:generate -DarchetypeGroupId=org.tynamo -DarchetypeArtifactId=tynamo-archetype -DarchetypeVersion=0.0.1-SNAPSHOT
 -->
 		<archetype>
-			<groupId>org.tynamo</groupId>
+			<groupId>org.amneris</groupId>
 			<artifactId>tynamo-archetype</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-			<repository>http://ci.repository.codehaus.org/</repository>
-			<description>Tynamo 0.1.0-SNAPSHOT Archetype</description>
+			<version>0.0.1-SNAPSHOT</version>
+			<!-- <repository>http://ci.repository.codehaus.org/</repository>  -->
+			<description>Amneris 0.0.1-SNAPSHOT Archetype</description>
 		</archetype>
 	</archetypes>
 </archetype-catalog>
