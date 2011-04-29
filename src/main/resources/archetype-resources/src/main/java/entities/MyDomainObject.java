@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@DefaultBeanModel(reorder = "id")
+@XmlRootElement(name = "mydomainobject")
 public class MyDomainObject
 {
 	private Long id;
