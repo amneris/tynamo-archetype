@@ -84,7 +84,7 @@ public class AppModule
 
 /*
 	@Startup
-	public static void initTrendty(Logger logger, MigrationManager migrationManager)
+	public static void init(Logger logger, MigrationManager migrationManager)
 	{
 		logger.info("Starting up...");
 //		migrationManager.migrate();
