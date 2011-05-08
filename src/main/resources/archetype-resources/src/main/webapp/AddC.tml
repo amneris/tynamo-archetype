@@ -3,7 +3,7 @@
 
 	<t:tynamo.flash t:id="flash" />
 
-	<h1>${D}{title}</h1>
+	<h2>${D}{title}</h2>
 
 	<br/>
 
