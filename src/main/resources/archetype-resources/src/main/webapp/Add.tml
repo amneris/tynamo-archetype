@@ -31,12 +31,9 @@
 	</t:form>
 
 	<p:sidebar>
-		<ul id="local">
-			<li>
-				<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List"
-				   context="classDescriptor.beanType">${D}{listAllLinkMessage}</a>
-			</li>
-		</ul>
+		<h3>Menu</h3>
+		<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List"
+		   context="classDescriptor.beanType">${D}{listAllLinkMessage}</a>
 	</p:sidebar>
 
 </t:layout>

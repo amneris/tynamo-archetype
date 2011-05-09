@@ -1,5 +1,9 @@
 <t:layout title="title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
 
+	<div class="contextual">
+		<t:pagelink class="icon icon-add" page="Add" context="classDescriptor.beanType">${D}{newlinkMessage}</t:pagelink>
+	</div>
+
 	<h2>${D}{title}</h2>
 	<br/>
 
@@ -19,13 +23,11 @@
 	</t:grid>
 
 	<p:sidebar>
-		<ul id="local">
-			<t:if test="classDescriptor.allowSave">
-				<li>
-					<t:pagelink class="newlink" page="Add" context="classDescriptor.beanType">${D}{newlinkMessage}</t:pagelink>
-				</li>
-			</t:if>
-		</ul>
+		<h3>Menu</h3>
+		<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List"
+		   context="classDescriptor.beanType">All</a>
+		<br/>
+		<h3>Other Options...</h3>
 	</p:sidebar>
 
 </t:layout>
