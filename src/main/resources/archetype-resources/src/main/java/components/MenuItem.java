@@ -1,6 +1,5 @@
 package ${package}.components;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.Link;
@@ -11,7 +10,6 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.PageRenderLinkSource;
 import org.apache.tapestry5.services.Request;
 import java.util.regex.Pattern;
-import ${package}.entities.MyDomainObject;
 
 
 public class MenuItem extends AbstractLink
@@ -43,22 +41,6 @@ public class MenuItem extends AbstractLink
     @Inject
     private Request request;
 
-    private Pattern pattern;
-
-    private boolean hasExpression;
-
-    void setupRender()
-    {
-        if (StringUtils.isNotBlank(expression))
-        {
-            pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-            hasExpression = true;
-        } else
-        {
-            hasExpression = false;
-        }
-    }
-
     void beginRender(MarkupWriter writer)
     {
         final Link link;
@@ -87,9 +69,10 @@ public class MenuItem extends AbstractLink
         final String pageName = resources.getPageName();
         boolean selected = pageName.equalsIgnoreCase(page);
 
-        if (hasExpression)
+        if (resources.isBound(expression))
         {
-            final String path = request.getPath();
+            String path = request.getPath();
+            Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
             selected = pattern.matcher(path).matches();
         }
 
