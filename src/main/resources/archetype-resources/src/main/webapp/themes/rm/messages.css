@@ -81,3 +81,10 @@ div.message img.message-icon {
     background: transparent !important;
 }
 
+div#errorMessages {
+    color: #D8000C;
+    background-color: #FFBABA;
+	margin-bottom:12px;
+	padding:4px 7px 4px 4px;
+}
+
