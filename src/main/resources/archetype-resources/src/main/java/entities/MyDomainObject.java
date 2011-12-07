@@ -21,6 +21,8 @@ public class MyDomainObject
 
 	private String name;
 
+	private boolean checked;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId()
@@ -42,6 +44,16 @@ public class MyDomainObject
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+
+	public boolean isChecked()
+	{
+		return checked;
+	}
+
+	public void setChecked(boolean checked)
+	{
+		this.checked = checked;
 	}
 
 	public boolean equals(Object o)
