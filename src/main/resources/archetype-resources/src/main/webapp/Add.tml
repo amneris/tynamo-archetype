@@ -3,11 +3,11 @@
 <t:layout title="title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
 
 
-	<t:tynamo.flash t:id="flash"/>
-
-	<h2>${D}{title}</h2>
+	<h2>${title}</h2>
 
 	<br/>
+
+	<t:alerts/>
 
 	<t:form clientValidation="true" validate="bean">
 		<t:errors/>
@@ -18,22 +18,19 @@
 			<br/>
 
 			<div class="t-beaneditor-row">
-				<t:submit t:id="save" id="save" t:event="apply" class="button"
-				          value="${D}{message:org.tynamo.i18n.apply}"/>
-				<t:submit t:id="saveAndReturnButton" id="saveAndReturnButton" class="button"
-				          value="${D}{message:org.tynamo.i18n.applyAndReturn}"/>
+				<t:submit event="continue" class="button" value="${message:org.tynamo.i18n.apply}"/>
+				<t:submit event="return" class="button" value="${message:org.tynamo.i18n.applyAndReturn}"/>
 				&nbsp; or &nbsp;
-				<t:actionlink class="button" style="color:red; font-weight:bold;" t:id="cancel">
-					${D}{message:org.tynamo.i18n.cancel}
-				</t:actionlink>
+				<t:eventlink class="button" style="color:red; font-weight:bold;" t:id="cancel">
+					${message:org.tynamo.i18n.cancel}
+				</t:eventlink>
 			</div>
 		</div>
 	</t:form>
 
 	<p:sidebar>
 		<h3>Menu</h3>
-		<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List"
-		   context="classDescriptor.beanType">${D}{listAllLinkMessage}</a>
+		<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List" context="beanType">${listAllLinkMessage}</a>
 	</p:sidebar>
 
 </t:layout>

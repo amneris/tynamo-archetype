@@ -1,9 +1,12 @@
 package ${package}.pages;
 
+import org.tynamo.routing.annotations.At;
+
 /**
  * Start page of application ${artifactId}.
  */
-public class Index
+@At("/")
+public class Home
 {
 
 

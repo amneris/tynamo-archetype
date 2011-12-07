@@ -4,22 +4,23 @@
 
 	<div class="contextual">
 		<t:security.hasRole role="admin">
-			<t:pagelink class="icon icon-edit" t:page="Edit" context="editPageContext">${D}{editlinkMessage}</t:pagelink>
-			<t:if test="allowRemove">
-				<t:actionlink onclick="return confirm('Are you sure ?');" class="icon icon-del"
-				              t:id="delete">${D}{message:org.tynamo.i18n.remove}</t:actionlink>
+			<t:pagelink class="icon icon-edit" t:page="Edit" context="editPageContext">${editlinkMessage}</t:pagelink>
+			<t:if test="deleteAllowed">
+				<t:eventlink class="deletelink" t:id="delete" onclick="return confirm('Are you sure ?');">${message:org.tynamo.i18n.remove}</t:eventlink>
 			</t:if>
+
 		</t:security.hasRole>
 	</div>
 
-	<h2>${D}{title}</h2>
+	<h2>${title}</h2>
+
+	<t:alerts/>
 
 	<t:beandisplay object="bean" lean="true" t:mixins="tynamo/Advisor"/>
 
 	<p:sidebar>
 		<h3>Menu</h3>
-		<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List"
-		   context="classDescriptor.beanType">${D}{listAllLinkMessage}</a>
+		<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List" context="beanType">${listAllLinkMessage}</a>
 	</p:sidebar>
 
 
