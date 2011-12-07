@@ -6,9 +6,15 @@ import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
+import org.apache.tapestry5.services.BeanBlockContribution;
+import org.apache.tapestry5.services.BeanBlockSource;
+import org.apache.tapestry5.services.DisplayBlockContribution;
 import org.tynamo.PageType;
 import org.tynamo.builder.Builder;
 import org.tynamo.security.FilterChainDefinition;
+import org.tynamo.security.SecuritySymbols;
+import org.tynamo.security.services.SecurityFilterChainFactory;
+import org.tynamo.security.services.impl.SecurityFilterChain;
 import org.tynamo.services.TynamoPageRenderLinkSource;
 import org.tynamo.shiro.extension.realm.text.ExtendedPropertiesRealm;
 
@@ -36,6 +42,9 @@ public class AppModule
 	{
 		loadApplicationDefaultsFromProperties("/applicationdefaults.properties", configuration);
 
+		// Tynamo's tapestry-security (Shiro) module configuration
+		configuration.add(SecuritySymbols.LOGIN_URL, "/signin");
+		configuration.add(SecuritySymbols.UNAUTHORIZED_URL, "/unauthorized");
 	}
 
 	public static void contributeWebSecurityManager(Configuration<Realm> configuration) 
@@ -43,22 +52,17 @@ public class AppModule
 		configuration.add(new ExtendedPropertiesRealm("classpath:shiro-users.properties"));
 	}
 
-	public static void contributeSecurityRequestFilter(OrderedConfiguration<FilterChainDefinition> configuration) {
-		//Security login page
-		configuration.add("assets-anon", new FilterChainDefinition("/assets/**", "anon"));
-		configuration.add("login-anon", new FilterChainDefinition("/security/login*", "anon"));
 
-		//Rest
-		//configuration.add("rest-anon", new FilterChainDefinition("/rest/**", "authcBasic"));
-
-		//Web
-		configuration.add("Inicio", new FilterChainDefinition("/", "roles[admin]"));
-		//configuration.add("Add", new FilterChainDefinition("/add/mydomainobject", "roles[user]"));
-		configuration.add("List", new FilterChainDefinition("/list/**", "roles[admin]"));
-		configuration.add("Add", new FilterChainDefinition("/add/**", "roles[admin]"));
-		configuration.add("Edit", new FilterChainDefinition("/edit/**", "roles[admin]"));
+	public static void contributeSecurityConfiguration(Configuration<SecurityFilterChain> configuration,
+	                                                   SecurityFilterChainFactory factory)
+	{
+		configuration.add(factory.createChain("/signin").add(factory.anon()).build());
+		configuration.add(factory.createChain("/").add(factory.roles(), "admin").build());
+		configuration.add(factory.createChain("/edit/**").add(factory.perms(), "*:update").build());
+		configuration.add(factory.createChain("/show/**").add(factory.perms(), "*:select").build());
+		configuration.add(factory.createChain("/add/**").add(factory.perms(), "*:insert").build());
+		configuration.add(factory.createChain("/list/**").add(factory.perms(), "*:select").build());
 	}
-	
 	/**
 	 * By default tapestry-hibernate will scan
 	 * InternalConstants.TAPESTRY_APP_PACKAGE_PARAM + ".entities" (witch is equal to "${package}.${artifactId}.entities")
@@ -98,6 +102,16 @@ public class AppModule
 		configuration.add(PageType.SHOW, ${package}.pages.Show.class);
 		configuration.add(PageType.ADD, ${package}.pages.Add.class);
 		configuration.add(PageType.EDIT, ${package}.pages.Edit.class);
+	}
+
+	/**
+	 * Contribution to the BeanBlockSource service to tell the BeanEditForm
+	 * component about the editors.
+	 */
+	@Contribute(BeanBlockSource.class)
+	public static void addCustomBlocks(Configuration<BeanBlockContribution> configuration)
+	{
+		configuration.add(new DisplayBlockContribution("boolean", "DisplayBlocks", "check"));
 	}
 
 	private static void loadApplicationDefaultsFromProperties(String properties, MappedConfiguration<String, String> contributions)
