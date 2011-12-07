@@ -20,6 +20,7 @@
 
 <div id="wrapper">
     <div id="top-menu">
+        <div style="text-align:right;"><t:security.loginlink /></div>
     </div>
 
     <div id="header">
