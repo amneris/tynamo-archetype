@@ -13,6 +13,8 @@ First read:
 
 .
 
+Then run:
+
 	mvn archetype:generate \
 		-DarchetypeArtifactId=tynamo-archetype \
 		-DarchetypeGroupId=org.amneris \
@@ -22,3 +24,6 @@ First read:
 
 .
 
+And after that:
+
+	mvn clean jetty:run -P commons,dev.local
