@@ -100,7 +100,7 @@ public class Show
 
 	public boolean isDeleteAllowed()
 	{
-		return descriptorService.isDeleteAllowed(beanType);
+		return descriptorService.getClassDescriptor(beanType).isAllowRemove();
 	}
 
 	public String getListAllLinkMessage()

@@ -16,7 +16,7 @@
 
 	<t:alerts/>
 
-	<t:beandisplay object="bean" lean="true" t:mixins="tynamo/Advisor"/>
+	<t:beandisplay object="bean" lean="true" t:mixins="tynamo/BeanModelAdvisor"/>
 
 	<p:sidebar>
 		<h3>Menu</h3>

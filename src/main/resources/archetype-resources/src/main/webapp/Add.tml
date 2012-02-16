@@ -13,7 +13,7 @@
 		<t:errors/>
 
 		<div class="box">
-			<t:beaneditor object="mb:bean" t:mixins="tynamo/Advisor" advisor.key="add"/>
+			<t:beaneditor object="mb:bean" t:mixins="tynamo/BeanModelAdvisor" beanmodeladvisor.key="add"/>
 
 			<br/>
 

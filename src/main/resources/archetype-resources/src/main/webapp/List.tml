@@ -8,7 +8,7 @@
 	<br/>
 
 
-	<t:grid t:id="grid" source="source" row="bean" inPlace="true" add="__id__" reorder="__id__" t:mixins="tynamo/Advisor"
+	<t:grid t:id="grid" source="source" row="bean" inPlace="true" add="__id__" reorder="__id__" t:mixins="tynamo/BeanModelAdvisor"
 	        class="m-data-grid">
 		<p:__id__header>
 		</p:__id__header>

@@ -1,9 +1,9 @@
 package ${package}.services;
 
 import org.apache.shiro.realm.Realm;
+import org.apache.tapestry5.hibernate.HibernateSymbols;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
-import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.services.BeanBlockContribution;
@@ -11,7 +11,6 @@ import org.apache.tapestry5.services.BeanBlockSource;
 import org.apache.tapestry5.services.DisplayBlockContribution;
 import org.tynamo.PageType;
 import org.tynamo.builder.Builder;
-import org.tynamo.security.FilterChainDefinition;
 import org.tynamo.security.SecuritySymbols;
 import org.tynamo.security.services.SecurityFilterChainFactory;
 import org.tynamo.security.services.impl.SecurityFilterChain;
@@ -20,7 +19,6 @@ import org.tynamo.shiro.extension.realm.text.ExtendedPropertiesRealm;
 
 import java.io.IOException;
 import java.util.Properties;
-
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry, it's a good place to configure and extend
@@ -45,6 +43,9 @@ public class AppModule
 		// Tynamo's tapestry-security (Shiro) module configuration
 		configuration.add(SecuritySymbols.LOGIN_URL, "/signin");
 		configuration.add(SecuritySymbols.UNAUTHORIZED_URL, "/unauthorized");
+		configuration.add(SecuritySymbols.SUCCESS_URL, "/home");
+
+		configuration.add(HibernateSymbols.EARLY_START_UP, "false");
 	}
 
 	public static void contributeWebSecurityManager(Configuration<Realm> configuration) 

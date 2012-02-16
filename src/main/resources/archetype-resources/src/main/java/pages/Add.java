@@ -89,7 +89,7 @@ public class Add
 	Link success()
 	{
 		persitenceService.save(bean);
-		alertManager.info("éxitossss!!!!");
+		alertManager.info(messages.getFormatter(Utils.ADDED_MESSAGE).format(bean));
 		return !continueAdding ? pageRenderLinkSource.createPageRenderLinkWithContext(Show.class, beanType, bean) : null;
 	}
 

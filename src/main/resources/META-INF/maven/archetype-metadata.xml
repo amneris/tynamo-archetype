@@ -15,23 +15,23 @@
 
 		<fileSet filtered="true">
 			<directory>src/main/webapp</directory>
-			<excludes>
-				<exclude>*.ico</exclude>
-				<exclude>**/*.jpg</exclude>
-				<exclude>**/*.png</exclude>
-				<exclude>**/*.gif</exclude>
-			</excludes>
+			<includes>
+				<include>WEB-INF/web.xml</include>
+				<include>About.tml</include>
+				<include>Contact.tml</include>
+				<include>WEB-INF/app*.properties</include>
+			</includes>
 		</fileSet>
 
 		<!-- Don't want to filter binary files nor .tml templates -->
 		<fileSet filtered="false">
 			<directory>src/main/webapp</directory>
-			<includes>
-				<include>*.ico</include>
-				<include>**/*.jpg</include>
-				<include>**/*.png</include>
-				<include>**/*.gif</include>
-			</includes>
+			<excludes>
+				<exclude>WEB-INF/web.xml</exclude>
+				<exclude>About.tml</exclude>
+				<exclude>Contact.tml</exclude>
+				<exclude>WEB-INF/app*.properties</exclude>
+			</excludes>
 		</fileSet>
 
 		<!-- log4j is filtered ant it needs to stay at the root. -->

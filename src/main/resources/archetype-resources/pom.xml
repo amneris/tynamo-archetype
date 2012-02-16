@@ -43,7 +43,7 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>7.6.0.RC1</version>
+				<version>7.6.0.v20120127</version>
 				<configuration>
 					<systemProperties>
 						<systemProperty>
@@ -183,7 +183,7 @@
 		<dependency>
 			<groupId>org.tynamo</groupId>
 			<artifactId>tapestry-security</artifactId>
-			<version>0.4.1-SNAPSHOT</version>
+			<version>0.4.2</version>
 		</dependency>
 
 		<dependency>
@@ -195,7 +195,7 @@
 		<dependency>
 			<groupId>org.tynamo</groupId>
 			<artifactId>tapestry-exceptionpage</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
+			<version>0.1.1</version>
 		</dependency>
 
 		<dependency>
@@ -216,7 +216,7 @@
 		<dependency>
 		    <groupId>org.apache.tapestry</groupId>
 		    <artifactId>tapestry-javadoc</artifactId>
-		    <version>5.3.0</version>
+		    <version>5.3.1</version>
 		    <scope>provided</scope>
 		</dependency>
 
