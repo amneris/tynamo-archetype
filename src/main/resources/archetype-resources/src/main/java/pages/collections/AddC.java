@@ -1,5 +1,4 @@
-package ${package}.pages;
-
+package ${package}.pages.collections;
 
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.Link;
@@ -18,16 +17,16 @@ import org.tynamo.builder.BuilderDirector;
 import org.tynamo.descriptor.CollectionDescriptor;
 import org.tynamo.descriptor.TynamoClassDescriptor;
 import org.tynamo.descriptor.TynamoPropertyDescriptor;
-import org.tynamo.util.TynamoMessages;
+import org.tynamo.routing.annotations.At;
 import org.tynamo.services.DescriptorService;
 import org.tynamo.services.PersistenceService;
+import org.tynamo.util.TynamoMessages;
 import org.tynamo.util.Utils;
 
-
 /**
- * Add elements to a composition.
- *
+ * Add Composition Page
  */
+@At("/{0}/{1}/{2}/new")
 public class AddC
 {
 
@@ -111,8 +110,7 @@ public class AddC
 	@OnEvent(EventConstants.SUCCESS)
 	Link success()
 	{
-//		persitenceService.addToCollection(collectionDescriptor, bean, parentBean);
-//		persitenceService.save(parentBean);
+		persitenceService.addToCollection(collectionDescriptor, bean, parentBean);
 		return back();
 	}
 
@@ -129,12 +127,12 @@ public class AddC
 	@OnEvent("cancel")
 	Link back()
 	{
-		return pageRenderLinkSource.createPageRenderLinkWithContext(Edit.class, collectionDescriptor.getBeanType(), parentBean);
+		return pageRenderLinkSource.createPageRenderLinkWithContext(ListC.class, parentBean.getClass(), parentBean, collectionDescriptor.getName());
 	}
 
 	public String getTitle()
 	{
-		return TynamoMessages.edit(messages, collectionDescriptor.getElementType());
+		return TynamoMessages.add(messages, collectionDescriptor.getElementType());
 	}
 
 	public String getListAllLinkMessage()

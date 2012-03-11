@@ -14,7 +14,6 @@ import org.tynamo.builder.Builder;
 import org.tynamo.security.SecuritySymbols;
 import org.tynamo.security.services.SecurityFilterChainFactory;
 import org.tynamo.security.services.impl.SecurityFilterChain;
-import org.tynamo.services.TynamoPageRenderLinkSource;
 import org.tynamo.shiro.extension.realm.text.ExtendedPropertiesRealm;
 
 import java.io.IOException;
@@ -96,15 +95,6 @@ public class AppModule
 	}
 */
 
-	@Contribute(TynamoPageRenderLinkSource.class)
-	public void contributeTynamoPageRenderLinkSource(MappedConfiguration<PageType, Class> configuration)
-	{
-		configuration.add(PageType.LIST, ${package}.pages.List.class);
-		configuration.add(PageType.SHOW, ${package}.pages.Show.class);
-		configuration.add(PageType.ADD, ${package}.pages.Add.class);
-		configuration.add(PageType.EDIT, ${package}.pages.Edit.class);
-	}
-
 	/**
 	 * Contribution to the BeanBlockSource service to tell the BeanEditForm
 	 * component about the editors.
@@ -112,7 +102,7 @@ public class AppModule
 	@Contribute(BeanBlockSource.class)
 	public static void addCustomBlocks(Configuration<BeanBlockContribution> configuration)
 	{
-		configuration.add(new DisplayBlockContribution("boolean", "DisplayBlocks", "check"));
+		configuration.add(new DisplayBlockContribution("boolean", "blocks/DisplayBlocks", "check"));
 	}
 
 	private static void loadApplicationDefaultsFromProperties(String properties, MappedConfiguration<String, String> contributions)
