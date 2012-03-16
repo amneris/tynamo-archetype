@@ -166,12 +166,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.17</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.tynamo</groupId>
 			<artifactId>tapestry-resteasy</artifactId>
 			<version>0.3.0</version>
@@ -206,6 +200,18 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>1.2.125</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>3.6.0.Final</version>
 		</dependency>
 
 		<!-- Provided by the servlet container, but sometimes referenced in the application code. -->
@@ -308,7 +314,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-war-plugin</artifactId>
-						<version>2.1-alpha-2</version>
+						<version>2.1.1</version>
 						<configuration>
 							<archive>
 								<manifest>
