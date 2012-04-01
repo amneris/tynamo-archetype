@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.amneris</groupId>
 	<artifactId>tynamo-archetype</artifactId>
-	<version>3.0.0-SNAPSHOT</version>
+	<version>0.3.0-SNAPSHOT</version>
 	<name>tynamo-archetype</name>
 	<description>Archetype for creating a model-driven, full-stack Tynamo application</description>
 	<url>https://github.com/amneris/tynamo-archetype</url>
