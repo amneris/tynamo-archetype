@@ -16,6 +16,11 @@ public class DevelopmentModule
 		// on the command line as -Dtapestry.production-mode=false
 		configuration.add(SymbolConstants.PRODUCTION_MODE, false);
 
+		// Controls whether whitespace is compressed by default in templates, or left as is.
+		// The factory default is to compress whitespace. This can be overridden
+		// using the xml:space attribute inside template elements.
+		configuration.add(SymbolConstants.COMPRESS_WHITESPACE, false);
+
 		// The application version number is incorprated into URLs for some
 		// assets. Web browsers will cache assets because of the far future expires
 		// header. If existing assets are changed, the version number should also
