@@ -107,6 +107,8 @@ public class AppModule
 	public static void addCustomBlocks(Configuration<BeanBlockContribution> configuration)
 	{
 		configuration.add(new DisplayBlockContribution("boolean", "blocks/DisplayBlocks", "check"));
+		configuration.add(new DisplayBlockContribution("single-valued-association", "blocks/DisplayBlocks", "showPageLink"));
+		configuration.add(new DisplayBlockContribution("many-valued-association", "blocks/DisplayBlocks", "showPageLinks"));
 	}
 
 	/**
