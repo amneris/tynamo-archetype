@@ -2,21 +2,20 @@ package ${package}.pages;
 
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.StringUtils;
-import org.apache.shiro.web.util.SavedRequest;
-import org.apache.shiro.web.util.WebUtils;
-import org.apache.tapestry5.PersistenceConstants;
-import org.apache.tapestry5.annotations.Persist;
+import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.ioc.annotations.Symbol;
+import org.apache.tapestry5.services.PageRenderLinkSource;
 import org.apache.tapestry5.services.RequestGlobals;
 import org.apache.tapestry5.services.Response;
+import org.slf4j.Logger;
+import org.tynamo.security.SecuritySymbols;
 import org.tynamo.security.pages.Login;
 import org.tynamo.security.services.PageService;
 import org.tynamo.security.services.SecurityService;
 
 import java.io.IOException;
-import org.slf4j.Logger;
 
 public class Signin extends Login
 {
@@ -32,8 +31,12 @@ public class Signin extends Login
 	@Property
 	private boolean jsecRememberMe;
 
-	@Persist(PersistenceConstants.FLASH)
-	private String loginMessage;
+    @Inject
+    private AlertManager alertManager;
+
+    @Inject
+	@Symbol(SecuritySymbols.REDIRECT_TO_SAVED_URL)
+	private boolean redirectToSavedUrl;
 
 	@Inject
 	private Response response;
@@ -47,7 +50,7 @@ public class Signin extends Login
 	@Inject
 	private PageService pageService;
 
-	public Object onActionFromJsecLoginForm()
+	public Object onActionFromJsecLoginForm() throws IOException
 	{
 
 		Subject currentUser = securityService.getSubject();
@@ -65,56 +68,39 @@ public class Signin extends Login
 			currentUser.login(token);
 		} catch (UnknownAccountException e)
 		{
-			loginMessage = "Account not exists";
+            String loginMessage = "Account not exists";
+			alertManager.error(loginMessage);
+			logger.debug(e.getMessage());
 			return null;
 		} catch (IncorrectCredentialsException e)
 		{
-			loginMessage = "Wrong password";
+            String loginMessage = "Wrong password";
+			alertManager.error(loginMessage);
+			logger.debug(e.getMessage());
 			return null;
 		} catch (LockedAccountException e)
 		{
-			loginMessage = "Account locked";
+            String loginMessage = "Account locked";
+			alertManager.error(loginMessage);
+			logger.debug(e.getMessage());
 			return null;
 		} catch (AuthenticationException e)
 		{
-			loginMessage = "Authentication Error";
+			// BIG ERROR, let's print the stacktrace too.
+			String loginMessage = "Authentication Error!";
+			alertManager.error(loginMessage);
+			logger.debug(loginMessage, e);
 			return null;
 		}
 
-		SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(requestGlobals.getHTTPServletRequest());
-
-		// TODO: try using shiro's own WebUtils.redirectToSavedRequest
-		if (savedRequest != null && savedRequest.getMethod().equalsIgnoreCase("GET"))
+		if (redirectToSavedUrl)
 		{
-			try
-			{
-				response.sendRedirect(savedRequest.getRequestUrl());
-				return null;
-			} catch (IOException e)
-			{
-				logger.warn("Can't redirect to saved request.");
-				return pageService.getSuccessPage();
-			}
-		} else
-		{
-			return pageService.getSuccessPage();
+			String requestUri = pageService.getSuccessPage();
+			if (!requestUri.startsWith("/")) requestUri = "/" + requestUri;
+			pageService.redirectToSavedRequest(requestUri);
+			return null;
 		}
 
-	}
-
-	public String getLoginMessage()
-	{
-		if (hasLoginMessage())
-		{
-			return loginMessage;
-		} else
-		{
-			return " ";
-		}
-	}
-
-	public boolean hasLoginMessage()
-	{
-		return StringUtils.hasText(loginMessage);
+		return pageService.getSuccessPage();
 	}
 }

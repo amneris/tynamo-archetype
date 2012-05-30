@@ -17,9 +17,7 @@
 			<table>
 				<tr>
 					<td>
-						<t:if test="hasLoginMessage()">
-							<div id="errorMessages">${loginMessage}</div>
-						</t:if>
+						<t:alerts/>
 					</td>
 				</tr>
 				<tr>
