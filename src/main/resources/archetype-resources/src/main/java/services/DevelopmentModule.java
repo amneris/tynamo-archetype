@@ -2,6 +2,9 @@ package ${package}.services;
 
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.annotations.Contribute;
+import org.apache.tapestry5.ioc.services.ApplicationDefaults;
+import org.apache.tapestry5.ioc.services.SymbolProvider;
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry if <em>tapestry.execution-mode</em>
@@ -9,7 +12,10 @@ import org.apache.tapestry5.ioc.MappedConfiguration;
  */
 public class DevelopmentModule
 {
-	public static void contributeApplicationDefaults(MappedConfiguration<String, Object> configuration)
+
+	@Contribute(SymbolProvider.class)
+	@ApplicationDefaults
+	public static void applicationDefaults(MappedConfiguration<String, Object> configuration)
 	{
 		// The factory default is true but during the early stages of an application
 		// overriding to false is a good idea. In addition, this is often overridden
@@ -20,11 +26,5 @@ public class DevelopmentModule
 		// The factory default is to compress whitespace. This can be overridden
 		// using the xml:space attribute inside template elements.
 		configuration.add(SymbolConstants.COMPRESS_WHITESPACE, false);
-
-		// The application version number is incorprated into URLs for some
-		// assets. Web browsers will cache assets because of the far future expires
-		// header. If existing assets are changed, the version number should also
-		// change, to force the browser to download new versions.
-		configuration.add(SymbolConstants.APPLICATION_VERSION, "${version}-DEV");
 	}
 }

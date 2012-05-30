@@ -12,6 +12,7 @@
 		<param-name>tapestry.app-package</param-name>
 		<param-value>${package}</param-value>
 	</context-param>
+
 	<!--
 		Specify some additional Modules for two different execution
 		modes: development and qa.
@@ -19,15 +20,15 @@
 		-->
 	<context-param>
 		<param-name>tapestry.development-modules</param-name>
-		<param-value>
-			${package}.services.DevelopmentModule
-		</param-value>
+		<param-value>${package}.services.DevelopmentModule</param-value>
 	</context-param>
 	<context-param>
 		<param-name>tapestry.qa-modules</param-name>
-		<param-value>
-			${package}.services.QaModule
-		</param-value>
+		<param-value>${package}.services.QaModule</param-value>
+	</context-param>
+	<context-param>
+		<param-name>tapestry.production-modules</param-name>
+		<param-value>${package}.services.ProductionModule</param-value>
 	</context-param>
 	<filter>
 		<filter-name>app</filter-name>

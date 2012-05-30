@@ -39,7 +39,7 @@
 			<directory>src/main/resources</directory>
 			<includes>
 				<include>log4j.properties</include>
-				<include>hibernate.cfg.xml</include>
+				<include>hibernate.*.xml</include>
 				<include>shiro-users.properties</include>
 			</includes>
 			<excludes>
@@ -52,18 +52,24 @@
 			<directory>src/main/resources</directory>
 			<includes>
 				<include>ValidationMessages.properties</include>
+				<include>applicationdefaults.properties</include>
+			</includes>
+		</fileSet>
+
+		<fileSet filtered="false" packaged="false">
+			<directory>src/main/filtered-resources</directory>
+			<includes>
+				<include>applicationdefaults.properties</include>
 			</includes>
 		</fileSet>
 
 		<!-- The rest should be packaged (and not filtered). -->
 		<fileSet filtered="false" packaged="true">
 			<directory>src/main/resources</directory>
-			<excludes>
-				<exclude>log4j.properties</exclude>
-				<exclude>hibernate.cfg.xml</exclude>
-				<exclude>ValidationMessages.properties</exclude>
-				<exclude>shiro-users.properties</exclude>
-			</excludes>
+			<includes>
+				<include>components/*.*</include>
+				<include>pages/*.*</include>
+			</includes>
 		</fileSet>
 
 		<fileSet filtered="true" packaged="false">
