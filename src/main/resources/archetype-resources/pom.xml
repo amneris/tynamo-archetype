@@ -138,6 +138,12 @@
 				<artifactId>hibernate3-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
+					<components>
+						<component>
+							<name>hbm2ddl</name>
+							<implementation>annotationconfiguration</implementation>
+						</component>
+					</components>
 					<componentProperties>
 						<configurationfile>target/classes/hibernate.dev.cfg.xml</configurationfile>
 						<export>false</export>
