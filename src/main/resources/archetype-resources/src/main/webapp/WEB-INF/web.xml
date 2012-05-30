@@ -14,8 +14,7 @@
 	</context-param>
 
 	<!--
-		Specify some additional Modules for two different execution
-		modes: development and qa.
+		Specify some additional Modules for different execution modes.
 		Remember that the default execution mode is production
 		-->
 	<context-param>
