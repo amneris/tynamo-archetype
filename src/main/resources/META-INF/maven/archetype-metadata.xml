@@ -67,8 +67,8 @@
 		<fileSet filtered="false" packaged="true">
 			<directory>src/main/resources</directory>
 			<includes>
-				<include>components/*.*</include>
-				<include>pages/*.*</include>
+				<include>components/**</include>
+				<include>pages/**</include>
 			</includes>
 		</fileSet>
 
