@@ -62,17 +62,10 @@
 				<configuration>
 					<systemProperties>
 						<systemProperty>
-							<name>javax.xml.stream.XMLInputFactory</name>
-							<value>com.ctc.wstx.stax.WstxInputFactory</value>
-						</systemProperty>
-						<systemProperty>
 							<name>tapestry.execution-mode</name>
 							<value>development</value>
 						</systemProperty>
 					</systemProperties>
-<!--
-					<systemPropertiesFile>target/classes/jetty.system.properties</systemPropertiesFile>
--->
 					<webAppConfig>
 						<contextPath>/${project.build.finalName}</contextPath>
 					</webAppConfig>
