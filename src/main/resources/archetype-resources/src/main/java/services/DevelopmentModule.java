@@ -1,7 +1,10 @@
 package ${package}.services;
 
 import org.apache.tapestry5.SymbolConstants;
+import org.apache.tapestry5.hibernate.HibernateConfigurer;
+import org.apache.tapestry5.hibernate.HibernateSessionSource;
 import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
@@ -27,4 +30,17 @@ public class DevelopmentModule
 		// using the xml:space attribute inside template elements.
 		configuration.add(SymbolConstants.COMPRESS_WHITESPACE, false);
 	}
+
+	@Contribute(HibernateSessionSource.class)
+	public static void configureHibernateSource(OrderedConfiguration<HibernateConfigurer> configurers)
+	{
+		configurers.add("${artifactId}HibernateConfigurer", new HibernateConfigurer()
+		{
+			public void configure(org.hibernate.cfg.Configuration configuration)
+			{
+				configuration.configure("/hibernate.dev.cfg.xml");
+			}
+		});
+	}
+
 }

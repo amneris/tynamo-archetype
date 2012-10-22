@@ -54,6 +54,8 @@ public class AppModule
 		configuration.add(SecuritySymbols.SUCCESS_URL, "/home");
 
 		configuration.add(HibernateSymbols.EARLY_START_UP, "false");
+		configuration.add(HibernateSymbols.DEFAULT_CONFIGURATION, "false");
+
 	}
 
 	@Contribute(WebSecurityManager.class)
