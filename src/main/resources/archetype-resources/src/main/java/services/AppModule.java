@@ -77,7 +77,10 @@ public class AppModule
 	public static void contributeSecurityConfiguration(Configuration<SecurityFilterChain> configuration,
 	                                                   SecurityFilterChainFactory factory)
 	{
-		configuration.add(factory.createChain("/signin").add(factory.anon()).build());
+		configuration.add(factory.createChain("/signin/**").add(factory.anon()).build());
+		configuration.add(factory.createChain("/signin:*/**").add(factory.anon()).build()); // for event links
+		configuration.add(factory.createChain("/signin.*/**").add(factory.anon()).build()); // for forms
+		configuration.add(factory.createChain("/signout/**").add(factory.anon()).build());
 		configuration.add(factory.createChain("/").add(factory.roles(), "admin").build());
 		configuration.add(factory.createChain("/edit/**").add(factory.perms(), "*:update").build());
 		configuration.add(factory.createChain("/show/**").add(factory.perms(), "*:select").build());
