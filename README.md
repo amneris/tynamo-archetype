@@ -25,8 +25,9 @@ Then run:
 		-DgroupId=com.yourcompany \
 		-DartifactId=projectname \
 		-Dpackage=com.yourcompany.projectname \
-		-Dversion=0.1.0-SNAPSHOT
+		-Dversion=0.1.0-SNAPSHOT \
+		-DhmacPassphrase=CHANGEME_PLEASE_INSERT_A_RANDOM_STRING
 
 And after that:
 
-	mvn clean jetty:run -P commons,dev.local
+	mvn clean jetty:run
