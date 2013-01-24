@@ -12,6 +12,7 @@
 <!-- #set( $D = '$' ) -->
 
 	<properties>
+		<tapestry-version>5.3.6</tapestry-version>
 		<tynamo-version>0.5.1-SNAPSHOT</tynamo-version>
 		<tapestry.app-package>${package}</tapestry.app-package>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -239,6 +240,32 @@
 	</reporting>
 
 	<dependencies>
+
+		<!-- force tapestry version -->
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-upload</artifactId>
+			<version>${tapestry-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-ioc</artifactId>
+			<version>${tapestry-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-hibernate</artifactId>
+			<version>${tapestry-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-beanvalidator</artifactId>
+			<version>${tapestry-version}</version>
+		</dependency>
+		<!-- / force tapestry version -->
 
 		<dependency>
 			<groupId>org.tynamo</groupId>
