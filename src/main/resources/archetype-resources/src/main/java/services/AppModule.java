@@ -3,6 +3,7 @@ package ${package}.services;
 import ${package}.api.MyDomainObjectResource;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.web.mgt.WebSecurityManager;
+import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.hibernate.HibernateSymbols;
 import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
 import org.apache.tapestry5.ioc.Configuration;
