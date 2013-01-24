@@ -87,7 +87,7 @@ public class AppModule
 
 	/**
 	 * By default tapestry-hibernate will scan
-	 * InternalConstants.TAPESTRY_APP_PACKAGE_PARAM + ".entities" (witch is equal to "${package}.${artifactId}.entities")
+	 * InternalConstants.TAPESTRY_APP_PACKAGE_PARAM + ".entities" (witch is equal to "${package}.entities")
 	 * for annotated entity classes.
 	 *
 	 * Contributes the package "${package}.${artifactId}.model" to the configuration, so that it will be
