@@ -56,6 +56,18 @@ public class AppModule
 		configuration.add(HibernateSymbols.EARLY_START_UP, "false");
 		configuration.add(HibernateSymbols.DEFAULT_CONFIGURATION, "false");
 
+		/**
+		 * HMAC_PASSPHRASE is used to configure hash-based message authentication of Tapestry data stored in forms, or
+		 * in the URL. Your application is less secure, and more vulnerable to denial-of-service attacks, when this
+		 * symbol is not configured.
+		 *
+		 * If you need help getting your random string use this link:
+		 *
+		 * http://www.random.org/strings/?num=1&len=16&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new
+		 *
+		 */
+		configuration.add(SymbolConstants.HMAC_PASSPHRASE, "${hmacPassphrase}");
+
 	}
 
 	@Contribute(WebSecurityManager.class)

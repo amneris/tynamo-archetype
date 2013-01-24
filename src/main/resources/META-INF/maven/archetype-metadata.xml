@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archetype-descriptor name="Tynamo Archetype">
 
+	<requiredProperties>
+		<requiredProperty key="hmacPassphrase.defaultValue">
+			<defaultValue>CHANGEME_PLEASE_INSERT_A_RANDOM_STRING</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="hmacPassphrase">
+			<defaultValue>${hmacPassphrase.defaultValue}</defaultValue>
+		</requiredProperty>
+	</requiredProperties>
+
 	<fileSets>
 		<fileSet filtered="true" packaged="true">
 			<directory>src/main/java</directory>
