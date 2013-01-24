@@ -12,7 +12,7 @@
 <!-- #set( $D = '$' ) -->
 
 	<properties>
-		<tynamo-version>0.3.0</tynamo-version>
+		<tynamo-version>0.5.1-SNAPSHOT</tynamo-version>
 		<tapestry.app-package>${package}</tapestry.app-package>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -275,7 +275,7 @@
 		<dependency>
 			<groupId>org.tynamo</groupId>
 			<artifactId>tapestry-routing</artifactId>
-			<version>0.0.2</version>
+			<version>0.0.4</version>
 		</dependency>
 
 		<dependency>
