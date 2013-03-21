@@ -67,9 +67,16 @@
 							<value>development</value>
 						</systemProperty>
 					</systemProperties>
-					<webAppConfig>
-						<contextPath>/${project.build.finalName}</contextPath>
-					</webAppConfig>
+					<contextPath>/</contextPath>
+					<!--
+						mvn jetty:run-forked - Running an unassembled webapp in a separate jvm
+					-->
+					<jvmArgs>-Dtapestry.execution-mode=development</jvmArgs>
+					<stopPort>9966</stopPort>
+					<!--
+						http://www.random.org/strings/?num=1&len=16&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new
+					-->
+					<stopKey>R4nd0mK3y</stopKey>
 				</configuration>
 			</plugin>
 
