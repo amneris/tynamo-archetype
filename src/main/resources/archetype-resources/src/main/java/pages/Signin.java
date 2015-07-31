@@ -6,13 +6,12 @@ import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
-import org.apache.tapestry5.services.PageRenderLinkSource;
 import org.apache.tapestry5.services.RequestGlobals;
 import org.apache.tapestry5.services.Response;
 import org.slf4j.Logger;
 import org.tynamo.security.SecuritySymbols;
+import org.tynamo.security.internal.services.LoginContextService;
 import org.tynamo.security.pages.Login;
-import org.tynamo.security.services.PageService;
 import org.tynamo.security.services.SecurityService;
 
 import java.io.IOException;
@@ -31,10 +30,10 @@ public class Signin extends Login
 	@Property
 	private boolean jsecRememberMe;
 
-    @Inject
-    private AlertManager alertManager;
+	@Inject
+	private AlertManager alertManager;
 
-    @Inject
+	@Inject
 	@Symbol(SecuritySymbols.REDIRECT_TO_SAVED_URL)
 	private boolean redirectToSavedUrl;
 
@@ -48,7 +47,7 @@ public class Signin extends Login
 	private SecurityService securityService;
 
 	@Inject
-	private PageService pageService;
+	private LoginContextService pageService;
 
 	public Object onActionFromJsecLoginForm() throws IOException
 	{
@@ -68,19 +67,19 @@ public class Signin extends Login
 			currentUser.login(token);
 		} catch (UnknownAccountException e)
 		{
-            String loginMessage = "Account not exists";
+			String loginMessage = "Account not exists";
 			alertManager.error(loginMessage);
 			logger.debug(e.getMessage());
 			return null;
 		} catch (IncorrectCredentialsException e)
 		{
-            String loginMessage = "Wrong password";
+			String loginMessage = "Wrong password";
 			alertManager.error(loginMessage);
 			logger.debug(e.getMessage());
 			return null;
 		} catch (LockedAccountException e)
 		{
-            String loginMessage = "Account locked";
+			String loginMessage = "Account locked";
 			alertManager.error(loginMessage);
 			logger.debug(e.getMessage());
 			return null;

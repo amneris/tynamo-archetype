@@ -12,8 +12,8 @@
 <!-- #set( $D = '$' ) -->
 
 	<properties>
-		<tapestry-version>5.3.7</tapestry-version>
-		<tynamo-version>0.5.1</tynamo-version>
+		<tapestry-version>5.4-beta-26</tapestry-version>
+		<tynamo-version>0.6.0-SNAPSHOT</tynamo-version>
 		<tapestry.app-package>${package}</tapestry.app-package>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -283,39 +283,33 @@
 		<dependency>
 			<groupId>org.tynamo</groupId>
 			<artifactId>tynamo-test</artifactId>
-			<version>0.0.1</version>
+			<version>0.1.0</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.tynamo</groupId>
 			<artifactId>tapestry-resteasy</artifactId>
-			<version>0.3.2</version>
+			<version>0.4.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jackson-provider</artifactId>
-			<version>3.0.1.Final</version>
+			<version>3.0.7.Final</version>
 		</dependency>
 
 		<!--Add for the security-->
 		<dependency>
 			<groupId>org.tynamo</groupId>
 			<artifactId>tapestry-security</artifactId>
-			<version>0.5.1</version>
+			<version>0.6.2</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.tynamo</groupId>
 			<artifactId>tapestry-routing</artifactId>
-			<version>0.0.7</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.tynamo</groupId>
-			<artifactId>tapestry-exceptionpage</artifactId>
-			<version>0.1.2</version>
+			<version>0.1.1</version>
 		</dependency>
 
 		<dependency>
@@ -333,7 +327,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
-			<version>3.6.0.Final</version>
+			<version>4.3.6.Final</version>
 		</dependency>
 
 		<!-- Provided by the servlet container, but sometimes referenced in the application code. -->
