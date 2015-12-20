@@ -3,7 +3,7 @@
 		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<!-- for more Database configuration options check: http://tynamo.org/Sample+database+configurations -->
+		<!-- for more Database configuration options check: http://www.tynamo.org/Sample+database+configurations/ -->
 		<property name="hibernate.connection.driver_class">org.h2.Driver</property>
 		<property name="hibernate.connection.url">jdbc:h2:mem:${artifactId}</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
